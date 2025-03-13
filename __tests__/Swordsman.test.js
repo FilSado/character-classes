@@ -1,13 +1,32 @@
 import Swordsman from '../src/Swordsman';
 
 describe('Swordsman', () => {
-  it('should create a Swordsman character', () => {
-    const swordsman = new Swordsman('Arthur');
-    expect(swordsman.name).toBe('Arthur');
-    expect(swordsman.type).toBe('Swordsman');
-    expect(swordsman.health).toBe(100);
-    expect(swordsman.level).toBe(1);
-    expect(swordsman.attack).toBe(40);
-    expect(swordsman.defence).toBe(10);
+  it('should create a Swordsman character with correct properties', () => {
+    const name = 'Arthur';
+
+    // Создаем эталонный объект (вне класса)
+    const expectedSwordsman = {
+      name: name,
+      type: 'Swordsman',
+      health: 100,
+      level: 1,
+      attack: 40,
+      defence: 10,
+    };
+
+    // Создаем экземпляр класса
+    const swordsman = new Swordsman(name);
+
+    // Сравниваем экземпляр с эталонным объектом
+    expect(swordsman).toEqual(expectedSwordsman);
+  });
+
+  it('should throw an error for invalid name length', () => {
+    expect(() => new Swordsman('A')).toThrowError(
+      'Invalid name length. Name must be between 2 and 10 characters.'
+    );
+    expect(() => new Swordsman('ThisIsAVeryLongName')).toThrowError(
+      'Invalid name length. Name must be between 2 and 10 characters.'
+    );
   });
 });
